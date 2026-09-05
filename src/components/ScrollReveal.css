@@ -1,0 +1,45 @@
+.scroll-reveal {
+  opacity: 0;
+
+  transition:
+    opacity 0.55s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s
+      cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition-delay:
+    var(--reveal-delay);
+
+  will-change:
+    opacity,
+    transform;
+}
+
+.scroll-reveal.fade-up {
+  transform: translateY(18px);
+}
+
+.scroll-reveal.fade-left {
+  transform: translateX(-18px);
+}
+
+.scroll-reveal.fade-right {
+  transform: translateX(18px);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .scroll-reveal {
+    opacity: 1;
+
+    transform: none !important;
+
+    transition: none !important;
+  }
+}

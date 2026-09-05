@@ -18,6 +18,49 @@ app.get("/api/health", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+app.post("/api/analyze-case", async (req, res) => {
+  try {
+    const {
+      dispute,
+      amount,
+      date,
+      outcome
+    } = req.body;
+
+    console.log("Received case:", {
+      dispute,
+      amount,
+      date,
+      outcome
+    });
+
+    // Temporary response.
+    // We will replace this with Bedrock next.
+    const analysis = {
+      facts: [
+        `Claim amount: S$${amount}`,
+        `Incident date: ${date}`
+      ],
+      assumptions: [],
+      missingInformation: [],
+      followUpQuestions: [],
+      outcomeSought: outcome
+    };
+
+    res.json({
+      success: true,
+      analysis
+    });
+  } catch (error) {
+    console.error("Case analysis error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to analyse case."
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
